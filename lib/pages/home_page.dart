@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_app/pages/story_page.dart';
 import 'package:social_media_app/widgets/story_bubble.dart';
 import 'package:social_media_app/widgets/user_post.dart';
 
@@ -33,6 +34,18 @@ final List bubbleStoriesList = [
 int _currentIndex = 0;
 
 class _HomePageState extends State<HomePage> {
+// Function to open Story Page
+  void _openStory() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const StoryPage();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +93,11 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   final userName = bubbleStoriesList[index][0];
                   final imagePath = bubbleStoriesList[index][1];
-                  return StoryBubble(name: userName, picImages: imagePath);
+                  return StoryBubble(
+                    name: userName,
+                    picImages: imagePath,
+                    onTap: _openStory,
+                  );
                 },
               ),
             ),
