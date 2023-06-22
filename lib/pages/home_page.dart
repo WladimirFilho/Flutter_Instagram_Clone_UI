@@ -11,10 +11,23 @@ class HomePage extends StatefulWidget {
 
 // user posts list
 final List userPost = [
-  // [ username, post ]
-  ['jonnymackein', 'lib/images/post1.png'],
-  ['nurianossabeih', 'lib/images/post2.png'],
-  ['mariamara', 'lib/images/post3.png'],
+  // [ username, post image, profile image  ]
+  ['jonnymackein', 'lib/images/post1.png', 'lib/images/user1.png'],
+  ['nurianossabeih', 'lib/images/post2.png', 'lib/images/user2.png'],
+  ['mariamara', 'lib/images/post3.png', 'lib/images/user3.png'],
+];
+
+// Stories List
+final List bubbleStoriesList = [
+  // [ username, post image ]
+  ['jonymackein', 'lib/images/user1.png'],
+  ['nurianossa', 'lib/images/user2.png'],
+  ['mariamara', 'lib/images/user3.png'],
+  ['janemarry', 'lib/images/user4.png'],
+  ['jonnymackein', 'lib/images/user1.png'],
+  ['nurianossabeih', 'lib/images/user2.png'],
+  ['mariamara', 'lib/images/user3.png'],
+  ['janemarry', 'lib/images/user4.png'],
 ];
 
 int _currentIndex = 0;
@@ -61,16 +74,14 @@ class _HomePageState extends State<HomePage> {
             // Stories
             SizedBox(
               height: 110,
-              child: ListView(
+              child: ListView.builder(
+                itemCount: bubbleStoriesList.length,
                 scrollDirection: Axis.horizontal,
-                children: const [
-                  StoryBubble(name: 'John'),
-                  StoryBubble(name: 'Wlad'),
-                  StoryBubble(name: 'Taylor'),
-                  StoryBubble(name: 'John'),
-                  StoryBubble(name: 'Wlad'),
-                  StoryBubble(name: 'Taylor'),
-                ],
+                itemBuilder: (context, index) {
+                  final userName = bubbleStoriesList[index][0];
+                  final imagePath = bubbleStoriesList[index][1];
+                  return StoryBubble(name: userName, picImages: imagePath);
+                },
               ),
             ),
             const SizedBox(height: 25),
@@ -85,7 +96,12 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   final userName = userPost[index][0];
                   final imagePath = userPost[index][1];
-                  return UserPost(imagePath: imagePath, userName: userName);
+                  final profilePic = userPost[index][2];
+                  return UserPost(
+                    imagePath: imagePath,
+                    userName: userName,
+                    profilePic: profilePic,
+                  );
                 },
               ),
             ),

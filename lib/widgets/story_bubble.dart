@@ -5,11 +5,11 @@ class StoryBubble extends StatelessWidget {
   const StoryBubble({
     Key? key,
     required this.name,
-    // required this.picImages,
+    required this.picImages,
   }) : super(key: key);
 
   final String name;
-  // final String picImages;
+  final String picImages;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,21 @@ class StoryBubble extends StatelessWidget {
               color: Colors.grey,
               shape: BoxShape.circle,
             ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(
+                picImages,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
 
           // User name
           const SizedBox(height: 12),
-          Text(name)
+          Text(
+            name,
+            style: TextStyle(fontSize: 13),
+          )
         ],
       ),
     );

@@ -1,14 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class UserPost extends StatelessWidget {
   const UserPost({
-    required this.imagePath,
+    Key? key,
     required this.userName,
-    super.key,
-  });
+    required this.imagePath,
+    required this.profilePic,
+  }) : super(key: key);
 
   final String userName;
   final String imagePath;
+  final String profilePic;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,13 @@ class UserPost extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Colors.amberAccent,
                         shape: BoxShape.circle,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          profilePic,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
 
@@ -55,9 +65,13 @@ class UserPost extends StatelessWidget {
           ),
 
           // Post
-          SizedBox(
-            height: 400,
-            child: Image.asset(imagePath),
+          Container(
+            height: 350,
+            width: double.infinity,
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.cover,
+            ),
           ),
 
           const Padding(
@@ -65,17 +79,21 @@ class UserPost extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.favorite_border_outlined,
-                      size: 32,
-                    ),
-                    Icon(Icons.chat_bubble_outline, size: 32),
-                    Icon(Icons.share, size: 32),
-                  ],
+                SizedBox(
+                  width: 90,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(
+                        Icons.favorite_border_outlined,
+                        size: 25,
+                      ),
+                      Icon(Icons.chat_bubble_outline, size: 25),
+                      Icon(Icons.share, size: 25),
+                    ],
+                  ),
                 ),
-                Icon(Icons.bookmark_outline, size: 32),
+                Icon(Icons.bookmark_outline, size: 25),
               ],
             ),
           ),
