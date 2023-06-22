@@ -9,6 +9,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+// user posts list
+final List userPost = [
+  // [ username, post ]
+  ['jonnymackein', 'lib/images/post1.png'],
+  ['nurianossabeih', 'lib/images/post2.png'],
+  ['mariamara', 'lib/images/post3.png'],
+];
+
+int _currentIndex = 0;
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -66,19 +76,34 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 25),
 
             // Feed
-            const UserPost(
-              userName: 'mitchkoko',
-            ),
-            const UserPost(
-              userName: 'nurianossabeih',
+            SingleChildScrollView(
+              child: ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: userPost.length,
+                itemBuilder: (context, index) {
+                  final userName = userPost[index][0];
+                  final imagePath = userPost[index][1];
+                  return UserPost(imagePath: imagePath, userName: userName);
+                },
+              ),
             ),
           ],
         ),
       ),
+
+      // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+        currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.grey[700],
+        selectedItemColor: const Color.fromARGB(255, 34, 134, 216),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class UserPost extends StatelessWidget {
   const UserPost({
+    required this.imagePath,
     required this.userName,
     super.key,
   });
 
   final String userName;
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,9 @@ class UserPost extends StatelessWidget {
           ),
 
           // Post
-          Container(
+          SizedBox(
             height: 400,
-            color: Colors.green,
+            child: Image.asset(imagePath),
           ),
 
           const Padding(
