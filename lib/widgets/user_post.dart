@@ -65,7 +65,7 @@ class UserPost extends StatelessWidget {
           ),
 
           // Post
-          Container(
+          SizedBox(
             height: 350,
             width: double.infinity,
             child: Image.asset(

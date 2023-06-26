@@ -43,7 +43,7 @@ class StoryBubble extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             name,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           )
         ],
       ),
